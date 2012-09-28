@@ -1,0 +1,36 @@
+{
+    "name": "KickWatcher",
+    "version": "0.1.1",
+    "manifest_version": 2,
+    "description": "Small addon to Chrome to track your backed projects and stay in touch with latest updates using only your favourite browser.",
+    "background": {
+        "page": "html/background.html"
+    },
+    "browser_action": {
+        "default_icon"  : "images/Icon-Small-50@2x.png",
+        "default_popup" : "html/popup.html"
+    },
+    "icons": {
+        "128"   : "images/Icon-Small-50@2x.png",
+        "16"    : "images/Icon-Small.png",
+        "48"    : "images/Icon-Small-50.png"
+    },
+    "permissions": [
+        "alarms",
+        "tabs",
+        "contextMenus",
+        "cookies",
+        "unlimitedStorage",
+        "notifications",
+        "http://*.kickstarter.com/*"
+    ],
+
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "content_scripts": [
+        {
+            "matches"   : ["http://*.kickstarter.com/projects/*/*"],
+            "js"        : ["js/jquery.js", "js/loader.js"],
+            "run_at"    : "document_idle"
+        }
+    ]
+}

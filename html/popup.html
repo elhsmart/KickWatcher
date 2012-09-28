@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Getting Started Extension's Popup</title>
+        <style>
+            body, html {
+                min-width:500px !important;
+                min-height: 200px;
+                width:500px !important;
+                overflow-x:hidden;
+                background: #eee !important;
+            }
+
+            .project-info {
+                float:left;
+                width:270px;
+                padding:5px;
+            }
+            .project-thumbnail {
+                float:left;
+            }
+
+            .project-card {
+                height:210px !important;
+            }
+
+            .project-card-wrap {
+                margin-bottom: 0px !important;
+            }
+
+            .project-stats {
+                width:200px !important;
+            }
+
+            .update {
+                height:75px;
+                overflow: hidden;
+            }
+
+            .project-description {
+                margin-bottom:0px !important;
+            }
+
+            .button {
+                float:right;
+                width:100px !important;
+                text-align: center;
+            }
+
+            .button-remove {
+                background: #cc0000 !important;
+                float:left;
+            }
+
+            .button-remove:hover {
+                background: #990000 !important;
+            }
+
+            .template {
+                display: none;
+            }
+            #company-name {
+                display: inline !important;
+            }
+
+            .empty-head {
+                width:100%;
+                padding-top:50px !important;
+                margin:0 auto !important;
+                text-align: center;
+            }
+            .empty-holder {
+                text-align: center;
+            }
+            .updates-count {
+                float:right;
+                background:#555;
+                color:white;
+                font-weight: bold;
+                padding:10px;
+                padding-top:5px;
+                padding-bottom:5px;
+                border-radius:5px;
+            }
+            .updates-count.updated {
+                background-color: #770000;
+            }
+            .updates-count.stable {
+                background-color: #3E78B3;
+            }
+        </style>
+        <link href="../css/fonts.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="../css/compass.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_one.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_two.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_three.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_four.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <a style="position:absolute; margin-top:-10000px;" href="javascript:void(0)">&nbsp;</a>
+        <div class="empty-holder" style="font-size:16px; color:#666 !important; display:none;">
+            <div class="empty-head hero"><h1 style="font-family:Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif; font-size:48px; font-weight: bold; color:#333 !important;">Ooops!</h1></div>Where is no any projects to watch. Please visit <div style="width:100%; margin: 0 auto;"><h1 style="margin-left:-90px; padding-left:50%; !important;" id="logo"><a target="_blank" style="padding:5px 0px; padding-top:10px;" href="http://www.kickstarter.com"><span>Kickstarter</span></a></h1></div> <br/><br/>to add some beautiful projects to WatchList.
+        </div>
+        <div class="project-holder" id="project-holder" style="width:500px !important ;max-height: 600px; overflow: scroll; float:right;">
+
+        </div>
+
+        <div class="project template" id="template" style="width:500px; display:none;">
+            <div class="project-card-wrap">
+                <div class="project-card">
+                    <div class="project-thumbnail">
+                        <img alt="Photo-little" class="projectphoto-little" height="150" src="http://s3.amazonaws.com/ksr/projects/329555/photo-little.jpg?1347588900" width="200">
+                    </div>
+                    <div class="project-info">
+                        <div class="updates-count" title="Updates Count">5</div>
+                        <h2>
+                            <strong>
+                                <a style="display:block; overflow: hidden; height:16px;" href="/projects/crescenttheater/keep-the-crescent?ref=home_popular" id="project-link">Keep The Crescent</a>
+                            </strong>
+                            <span>by <span id="company-name">Crescent Theater</span></span>
+                        </h2>
+                        <p class="project-description" id="project-description">Hollywood is forcing theaters to upgrade to digital projectors at great expense as the era of 35mm film comes to an end.</p>
+                        <div class="update">
+                            <h2>Latest Update</h2>
+                            <p class="latest-update">
+                                Loading...
+                            </p>
+                        </div>
+                        <div class="hide-ended" id="pledge-wrap">
+                            <a class="button roundsmall button-remove" id="button-remove" title="Remove">Remove</a>
+                            <a class="button roundsmall button-visit" id="button-visit" title="Visit Project">Visit Project</a>
+                        </div>
+                    </div>
+                    <div class="project-status project-failed" style="display:none;">
+                        <strong>Funding Unsuccessful</strong>
+                        <span>Project ended on <span id="end-date" style="display:inline !important;"></span></span>
+                    </div>
+                    <div class="project-pledged-successful" style="display: none;">
+                        <strong>Successful!</strong>
+                    </div>
+                    <div class="project-pledged-wrap">
+                        <div class="project-pledged" style="width: 93.24%"></div>
+                    </div>
+                    <ul class="project-stats">
+                        <li class="first funded">
+                            <strong>93%</strong>
+                            funded
+                        </li>
+                        <li class="pledged">
+                            <strong>$70,491</strong>
+                            pledged
+                        </li>
+                        <li class="last successful" style="display: none;">
+                            <strong>Funded</strong>
+                            <div class="deadline">
+                            </div>
+                        </li>
+                        <li class="last ksr_page_timer" data-end_time="2012-11-17T21:44:43Z">
+                            <strong>
+                                <div class="num">51</div>
+                            </strong>
+                            <div class="span text" data-word="left">days to go</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/date.js"></script>
+    <script src="../js/popup.js"></script>
+</html>

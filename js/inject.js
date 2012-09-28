@@ -1,0 +1,1 @@
+window.postMessage({ type: "FROM_PAGE", project: window.current_project }, "*");
