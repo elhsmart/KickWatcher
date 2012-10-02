@@ -2,7 +2,33 @@
 <html>
     <head>
         <title>Getting Started Extension's Popup</title>
+        <link href="../css/fonts.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="../css/compass.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_one.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_two.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_three.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_four.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/antiscroll.css" media="screen" rel="stylesheet" type="text/css" />
         <style>
+            @font-face {
+                font-family: 'icons';
+                src: url('../fonts/fontawesome-webfont.eot?#') format('eot'),
+                url('../fonts/fontawesome-webfont.woff') format('woff'),
+                url('../fonts/fontawesome-webfont.ttf') format('truetype');
+            }
+
+            /* Same CSS as above, plus */
+            .icon-alone {
+                font-family: icons;
+                display: inline-block; /* Chrome 19 was weird with clickability without this */
+            }
+
+            .screen-reader-text { /* Reusable, toolbox kind of class */
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
             body, html {
                 min-width:500px !important;
                 min-height: 200px;
@@ -81,6 +107,7 @@
                 padding-top:5px;
                 padding-bottom:5px;
                 border-radius:5px;
+                cursor: pointer;
             }
             .updates-count.updated {
                 background-color: #770000;
@@ -88,23 +115,111 @@
             .updates-count.stable {
                 background-color: #3E78B3;
             }
+
+            .mini-template .project-card {
+                height:42px !important;
+            }
+
+            .mini-template .project-stats {
+                left: 50px !important;
+                top:6px;
+            }
+            .mini-template .project-stats .pledged {
+                padding:0px !important;
+            }
+
+            .mini-template .project-pledged-wrap {
+                top:34px;
+                margin-left:-5px;
+                width:480px !important;
+            }
+
+            .mini-template .button-remove, .mini-template .button-visit {
+                float:right !important;
+                top:0px !important;
+                margin-top:0px !important;
+                width:6px !important;
+                padding-left:8px !important;
+                padding-top:8px;
+                padding-bottom:0px;
+                margin-left:6px;
+            }
+
+            .mini-template .button-visit {
+                padding:0px !important;
+                font-size:16px;
+                padding-left:10px !important;
+                padding-right:10px !important;
+                padding-top:6px !important;
+                padding-bottom:2px !important;
+            }
+
+            .mini-template .updates-count {
+                padding-bottom:4px !important;
+            }
+
+            .popup-controls {
+                padding:2px !important;
+                padding-left:6px !important;
+            }
+
+            .popup-controls a{
+                float:left !important;
+                width:18px !important;
+                margin-bottom:6px !important;
+                margin-right:6px !important;
+            }
         </style>
-        <link href="../css/fonts.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="../css/compass.css" media="screen" rel="stylesheet" type="text/css" />
-        <link href="../css/views_one.css" media="screen" rel="stylesheet" type="text/css" />
-        <link href="../css/views_two.css" media="screen" rel="stylesheet" type="text/css" />
-        <link href="../css/views_three.css" media="screen" rel="stylesheet" type="text/css" />
-        <link href="../css/views_four.css" media="screen" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <a style="position:absolute; margin-top:-10000px;" href="javascript:void(0)">&nbsp;</a>
         <div class="empty-holder" style="font-size:16px; color:#666 !important; display:none;">
             <div class="empty-head hero"><h1 style="font-family:Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif; font-size:48px; font-weight: bold; color:#333 !important;">Ooops!</h1></div>Where is no any projects to watch. Please visit <div style="width:100%; margin: 0 auto;"><h1 style="margin-left:-90px; padding-left:50%; !important;" id="logo"><a target="_blank" style="padding:5px 0px; padding-top:10px;" href="http://www.kickstarter.com"><span>Kickstarter</span></a></h1></div> <br/><br/>to add some beautiful projects to WatchList.
         </div>
-        <div class="project-holder" id="project-holder" style="width:500px !important ;max-height: 600px; overflow: scroll; float:right;">
+        <div class="project-holder" id="project-holder" style="width:500px !important ;">
 
         </div>
+        <div class="project mini-template template-mini" id="mini-template" style="width:500px;display:none;height:62px !important;">
+            <div class="project-card-wrap">
+                <div class="project-card">
+                    <img alt="Photo-little" class="projectphoto-thumb" src="http://s3.amazonaws.com/ksr/projects/329555/photo-thumb.jpg?1347588900">
 
+                    <a class="button roundsmall button-visit icon-alone" id="button-visit" title="Visit Project">&#xF054;</a>
+                    <a class="button roundsmall button-remove icon-alone" id="button-remove" data-icon="&#x21f7;" title="Remove">&#x21f7;</a>
+                    <div class="updates-count stable" title="Updates Count">13</div>
+                    <h2 style="width:140px !important; float:right; margin-left:0px;">
+                        <strong>
+                            <a style="display:block; overflow: hidden; height:16px;" href="/projects/crescenttheater/keep-the-crescent?ref=home_popular" id="project-link">Keep The Crescent</a>
+                        </strong>
+                        <span style="padding-top:0px !important;">by <span id="company-name" style="padding-top:0px !important;">Crescent Theater</span></span>
+                    </h2>
+                    <ul class="project-stats">
+                        <li class="first funded">
+                            <strong>93%</strong>
+                            funded
+                        </li>
+                        <li class="pledged">
+                            <strong>$70,491</strong>
+                            pledged
+                        </li>
+                        <li class="last successful" style="display: none;">
+                            <strong>Funded</strong>
+                            <div class="deadline">
+                            </div>
+                        </li>
+                        <li class="last ksr_page_timer" data-end_time="2012-11-17T21:44:43Z">
+                            <strong>
+                                <div class="num">51</div>
+                            </strong>
+                            <div class="span text" data-word="left">days to go</div>
+                        </li>
+                    </ul>
+                    <div class="project-pledged-wrap">
+                        <div class="project-pledged" style="width: 93.24%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="project template" id="template" style="width:500px; display:none;">
             <div class="project-card-wrap">
                 <div class="project-card">
@@ -165,8 +280,14 @@
                 </div>
             </div>
         </div>
+
+        <div class="popup-controls">
+            <a class="button roundsmall button-cog icon-alone" style="font-size:20px !important; padding-right:8px !important;  padding-left:10px !important; padding-top:10px !important;" id="button-visit" title="Settings">&#xF013;</a>
+            <a class="button roundsmall button-remove icon-alone" style="font-size:20px !important; padding-right:8px !important;  padding-left:10px !important; padding-top:10px !important;"  id="button-remove" title="Hide">&#xF0AA;</a>
+        </div>
     </body>
     <script src="../js/jquery.js"></script>
+    <script src="../js/antiscroll.js"></script>
     <script src="../js/date.js"></script>
     <script src="../js/popup.js"></script>
 </html>

@@ -1,5 +1,14 @@
 KickUpdaterPopup = {
 
+    const: {
+        "LIST_STYLE_FULL": 1,
+        "LIST_STYLE_SHORT": 2
+    },
+
+    options: function() {
+        return JSON.parse(localStorage.KickWatcherOptions);
+    },
+
     bind: function() {
         var self = this;
         jQuery(".template-generated").remove();
@@ -15,7 +24,44 @@ KickUpdaterPopup = {
         }
         if(self.projectCounter == 0) {
             jQuery(".empty-holder").css("display","block");
+        } else {
+            var lineHeight = 62;
+            if(self.options().LIST_STYLE == self.const.LIST_STYLE_FULL) {
+                lineHeight = 230;
+            }
+
+            if((lineHeight * self.projectCounter) > 540) {
+                el = jQuery("<div class='scroll-holder'>" +
+                    "<div class='antiscroll-inner' style='height:500px; min-height: 500px !important;'></div>" +
+                    "</div>");
+                el.css({
+                    "height":"500px !important",
+                    "width":"500px !important",
+                    "overflow":"scroll"
+                });
+                jQuery(".project-holder").attr("style", "").css({
+                    "height":"480px !important;",
+                    "maxHeight":"480px !important;",
+                    "width":"500px !important"
+                });
+
+                jQuery("body, html").attr("style","min-width:506px !important;max-width:506px !important;min-height:543px !important; max-height:543px !important;");
+
+                jQuery(".project-holder").before(el);
+                el.find(".antiscroll-inner").append(jQuery(".project-holder"));
+                setTimeout(function(){
+                    jQuery(".scroll-holder").antiscroll();
+                }, 0);
+            } else {
+                jQuery("body").attr("style","max-width:500px !important; min-width:500px !important;");
+            }
         }
+        jQuery(".button-remove").click(function(){
+            window.close();
+        });
+        jQuery(".button-cog").click(function(){
+            chrome.tabs.create({url: chrome.extension.getURL("html/options.html")});
+        });
     },
 
     removeFromWatched: function(event) {
@@ -68,7 +114,13 @@ KickUpdaterPopup = {
     },
 
     generateTemplate: function(data, name, project) {
-        var tmpl = jQuery(".template")
+        var self = window.KickUpdaterPopup;
+
+        var tmpl_name = ".template";
+        if(self.options().LIST_STYLE == self.const.LIST_STYLE_SHORT) {
+            tmpl_name = ".template-mini";
+        }
+        var tmpl = jQuery(tmpl_name)
             .clone();
 
         if(project.isUpdated) {
@@ -79,6 +131,7 @@ KickUpdaterPopup = {
         tmpl.removeClass("template");
 
         tmpl.find("#company-name").html("");
+
         if(data.creator && data.creator.name) {
             tmpl.find("#company-name").html(data.creator.name);
         }
@@ -94,8 +147,18 @@ KickUpdaterPopup = {
         }
 
         tmpl.find(".projectphoto-little").attr("src", "");
-        if(data.photo && data.photo.little) {
-            tmpl.find(".projectphoto-little").attr("src", data.photo.little);
+
+        if(self.options().LIST_STYLE == self.const.LIST_STYLE_SHORT) {
+            if(data.photo && data.photo.little) {
+                tmpl.find(".projectphoto-thumb").attr({
+                        "src":data.photo.little,
+                        "width":"40px"
+                    });
+            }
+        } else {
+            if(data.photo && data.photo.little) {
+                tmpl.find(".projectphoto-little").attr("src", data.photo.little);
+            }
         }
 
         var percentage = parseInt(data.pledged) / (parseInt(data.goal)/100);
@@ -165,10 +228,17 @@ KickUpdaterPopup = {
         tmpl.find(".button-visit").attr({"href": url, target:"_blank"});
         tmpl.find(".latest-update").html(data.latestUpdateTitle);
 
-        tmpl.attr({
-            class:"project template-generated",
-            style:"width:500px; height:230px !important;"
-        });
+        if(self.options().LIST_STYLE == self.const.LIST_STYLE_SHORT) {
+            tmpl.attr({
+                class:"project mini-template template-generated-mini",
+                style:"width:500px;"
+            });
+        } else {
+            tmpl.attr({
+                class:"project template-generated",
+                style:"width:500px; height:230px !important;"
+            });
+        }
 
         tmpl.find(".updates-count").html(project.updatesCount);
         if(project.isUpdated) {
@@ -181,10 +251,11 @@ KickUpdaterPopup = {
     },
 
     init: function() {
+        window.KickUpdaterPopup = this;
         var self = this;
-        jQuery(document).ready(function(){
+        //jQuery(document).ready(function(){
             self.bind();
-        })
+        //})
         return self;
     }
 }.init();

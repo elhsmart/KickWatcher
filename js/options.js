@@ -1,5 +1,6 @@
 Options = {
     options: {},
+
     const: {
         "LIST_STYLE_FULL": 1,
         "LIST_STYLE_SHORT": 2
@@ -19,7 +20,6 @@ Options = {
 
         if(typeof options == "object") {
             self.options = options;
-            console.log("aaaa", self.options);
         }
     },
 
