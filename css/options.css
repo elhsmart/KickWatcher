@@ -1,0 +1,86 @@
+html, body {
+    background: #fff;
+}
+
+body {
+    margin:32px;
+    direction: ltr;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.settings {
+
+}
+
+.settings-title {
+    background-color: #F1F1F1;
+    border-bottom: 1px solid #CCC;
+    height: 71px;
+    padding-top: 26px;
+    padding-left: 42px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    color: #222;
+    line-height: 24px;
+}
+
+.settings-title h1 {
+    -webkit-user-select: none;
+    color: #53637D;
+    font-size: 26px;
+    font-weight: normal !important;
+    text-shadow: white 0 1px 2px;
+    display: block;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.kickwatcher-logo {
+    float: left;
+    margin-top:20px;
+    margin-left:20px;
+    padding-right: 16px;
+}
+
+.button-reset {
+    width:100px;
+    float:right;
+    margin-right:20px;
+    margin-top:40px;
+}
+
+.section {
+    border-bottom:1px solid #eee;
+    width:80%;
+    padding:16px;
+}
+
+.section.first {
+    margin-top:25px;
+    border-top:1px solid #eee;
+}
+
+.section .title {
+    width:160px;
+    float:left;
+    padding-left:10px;
+    text-align: right;
+    font-size: 18px;
+}
+
+.section .setting {
+    text-align: left;
+    margin-left:200px;
+}
+
+.section .setting .vertical-block {
+    padding-top:10px;
+}
+.section .setting .vertical-block.first {
+    padding-top:0px !important;
+}

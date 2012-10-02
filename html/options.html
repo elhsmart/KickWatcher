@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Getting Started Extension's Popup</title>
+        <link href="../css/fonts.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="../css/compass.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_one.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_two.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_three.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/views_four.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="../css/options.css" media="screen" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="../js/options.js"></script>
+    </head>
+    <body>
+        <div class="settings">
+            <img class="kickwatcher-logo" src="../images/Icon-Small@2x.png" width="64" height="64" alt="logo">
+            <a class="button roundsmall button-reset" id="button-visit" title="Visit Project" href="#">Reset to Defaults</a>
+            <div class="settings-title">
+                <h1>KickWatcher extension Settings</h1>
+            </div>
+
+            <div class="section first">
+                <div class="title">
+                    List Style
+                </div>
+                <div class="setting">
+                    <div class="vertical-block first">
+                        <input type="radio" name="list-style" id="LIST_STYLE_FULL"  value="LIST_STYLE_FULL">
+                        Full Project Description
+                    </div>
+                    <div class="vertical-block">
+                        <input type="radio" name="list-style" id="LIST_STYLE_SHORT" value="LIST_STYLE_SHORT">
+                        Short project line
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="title">
+                    Notifications
+                </div>
+                <div class="setting">
+                    <div class="vertical-block first">
+                        <input type="checkbox" name="use-notifications" id="USE_NOTIFICATIONS">
+                        Use Desktop Notifications to inform about new updates.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
