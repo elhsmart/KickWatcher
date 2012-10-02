@@ -7,6 +7,10 @@ KickUpdater = {
     requestTimerId: 0,
     oldChromeVersion: !chrome.runtime,
 
+    options: function() {
+        return JSON.parse(localStorage.KickWatcherOptions);
+    },
+
     save: function() {
         localStorage.KickUpdaterData = JSON.stringify(KickUpdater.data);
         localStorage.KickUpdaterStats = JSON.stringify(KickUpdater.stats);
@@ -146,7 +150,9 @@ KickUpdater = {
                 }
 
                 if(updatesCount > KickUpdater.data[id].updatesCount) {
-                    KickUpdater.updateIcon(updatesCount - KickUpdater.data[id].updatesCount);
+                    if(!KickUpdater.data[id].isUpdated) {
+                        KickUpdater.updateIcon(updatesCount - KickUpdater.data[id].updatesCount);
+                    }
                     KickUpdater.data[id].updatesCount = updatesCount;
                     KickUpdater.data[id].isUpdated = true;
                     KickUpdater.save();
@@ -188,9 +194,7 @@ KickUpdater = {
     onWatchdog: function() {
         chrome.alarms.get('refresh', function(alarm) {
             if (alarm) {
-                //console.log('Refresh alarm exists.');
             } else {
-                //console.log('Refresh alarm not exists. Resheduling.');
                 setTimeout(function(){
                     KickUpdater.startRequest({scheduleRequest:true});
                 }, 10);
