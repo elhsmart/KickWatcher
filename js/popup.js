@@ -11,7 +11,7 @@ KickUpdaterPopup = {
 
     bind: function() {
         var self = this;
-        jQuery(".template-generated").remove();
+        jQuery(".template-generated, .template-generated-mini").remove();
         self.projectCounter = 0;
         self.projects       = {};
         if(localStorage.KickUpdaterData) {
