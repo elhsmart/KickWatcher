@@ -94,6 +94,7 @@ KickUpdaterPopup = {
 
     removeUpdated: function(proj, tmpl) {
         var projects = JSON.parse(localStorage.KickUpdaterData);
+
         delete projects[proj.project].isUpdated;
         delete projects[proj.project].data.isUpdated;
 
@@ -111,6 +112,12 @@ KickUpdaterPopup = {
             }
         });
         localStorage.KickUpdaterData = JSON.stringify(projects);
+
+        // message to background page to grab latest info
+        var data = {
+            type: "RELOAD_OBJECTS"
+        };
+        chrome.extension.sendMessage(data);
     },
 
     generateTemplate: function(data, name, project) {
@@ -143,7 +150,14 @@ KickUpdaterPopup = {
 
         tmpl.find("#project-link").html("");
         if(data.name) {
-            tmpl.find("#project-link").html(data.name);
+            console.log(data);
+            var link = tmpl
+                .find("#project-link");
+                link.html(data.name);
+                link.attr({
+                    "href": data.urls.web.project_short,
+                    "target": "_blank"
+                });
         }
 
         tmpl.find(".projectphoto-little").attr("src", "");
@@ -242,9 +256,9 @@ KickUpdaterPopup = {
 
         tmpl.find(".updates-count").html(project.updatesCount);
         if(project.isUpdated) {
-            tmpl.find(".updates-count").addClass("updated");
+            tmpl.find(".updates-count").removeClass("stable").addClass("updated");
         } else {
-            tmpl.find(".updates-count").addClass("stable");
+            tmpl.find(".updates-count").removeClass("updated").addClass("stable");
         }
 
         jQuery("#project-holder").append(tmpl);

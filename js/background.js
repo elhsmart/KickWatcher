@@ -65,6 +65,10 @@ KickUpdater = {
                 KickUpdater.save();
                 break;
             }
+            case "RELOAD_OBJECTS": {
+                KickUpdater.load();
+                break;
+            }
             case "DELETE_STORED_OBJECTS": {
                 delete KickUpdater.data[message.project];
                 KickUpdater.save();
@@ -153,6 +157,17 @@ KickUpdater = {
                     if(!KickUpdater.data[id].isUpdated) {
                         KickUpdater.updateIcon(updatesCount - KickUpdater.data[id].updatesCount);
                     }
+
+                    if(self.options().USE_NOTIFICATIONS) {
+                        var notification = webkitNotifications.createNotification(
+                            chrome.extension.getURL('images/Icon-Small-48.png'),
+                            KickUpdater.data[id].data.name+" just Updated!",
+                            KickUpdater.data[id].data.latestUpdateTitle
+                        );
+
+                        notification.show();
+                    }
+
                     KickUpdater.data[id].updatesCount = updatesCount;
                     KickUpdater.data[id].isUpdated = true;
                     KickUpdater.save();

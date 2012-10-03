@@ -15,6 +15,9 @@
         "16"    : "images/Icon-Small.png",
         "48"    : "images/Icon-Small-50.png"
     },
+    "web_accessible_resources": [
+        "images/Icon-Small-48.png"
+    ],
     "permissions": [
         "alarms",
         "tabs",
