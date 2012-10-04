@@ -37,7 +37,7 @@ KickUpdaterPopup = {
                 el.css({
                     "height":"500px !important",
                     "width":"500px !important",
-                    "overflow":"scroll"
+                    "overflow":"hidden"
                 });
                 jQuery(".project-holder").attr("style", "").css({
                     "height":"480px !important;",

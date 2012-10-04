@@ -1,6 +1,6 @@
 {
     "name": "KickWatcher",
-    "version": "0.1.1",
+    "version": "0.2.2",
     "manifest_version": 2,
     "description": "Small addon to Chrome to track your backed projects and stay in touch with latest updates using only your favourite browser.",
     "background": {
