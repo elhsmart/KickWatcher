@@ -1,1 +1,1 @@
-window.postMessage({ type: "FROM_PAGE", project: window.current_project }, "*");
+window.postMessage({ type: "FROM_PAGE", project: JSON.stringify(window.current_project) }, "*");

@@ -60,7 +60,8 @@ window.kickWatcher = {
             return;
 
             if (event.data.type && (event.data.type == "FROM_PAGE")) {
-                self.currentProject.data = event.data.project;
+                self.currentProject.data = JSON.parse(event.data.project).data;
+                console.log(self.currentProject.data);
                 self.bindWatcher();
             }
 
@@ -197,7 +198,10 @@ window.kickWatcher = {
     },
 
     inject: function() {
-        location.href='javascript:(function(){window.postMessage({ type: "FROM_PAGE", project: window.current_project }, "*");})()';
+        location.href='javascript:(function(){' +
+            'window.postMessage(' +
+            '{ type: "FROM_PAGE", project: JSON.stringify(window.current_project) }, "*");' +
+         '})()';
     },
 
     arrayFlip: function( trans ) {

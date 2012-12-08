@@ -115,8 +115,13 @@ KickUpdater = {
 
         var dataRegex     = /\/\/\<\!\[CDATA\[[\n\r{0,}](.*)/gi
             res           = dataRegex.exec(data);
-        var newProjectData= JSON.parse(res[1].replace(" window.current_project =", ""));
+        var res = res[1].replace(" window.current_project =", "");
+            res = res.replace(/\&quot\;/g, '"');
+            res = res.substring(0, res.length-2);
+            res = jQuery.trim(res);
+            res = res.substring(1, res.length);
 
+        var newProjectData= JSON.parse(res);
         self.data[id].data = newProjectData;
         self.save();
 
@@ -191,7 +196,7 @@ KickUpdater = {
             }
             requestTimerId = window.setTimeout(KickUpdater.onAlarm, delay*60*1000);
         } else {
-            chrome.alarms.create('refresh', {periodInMinutes: delay});
+            chrome.alarms.create('refresh', {periodInMinutes: parseInt(delay)});
         }
     },
 
